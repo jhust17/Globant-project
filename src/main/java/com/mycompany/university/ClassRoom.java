@@ -15,8 +15,9 @@ public class ClassRoom extends University {
     private String classroom;
     private Teacher teacher;
     private ArrayList<Student> students;
-
-    public ClassRoom(String classroom, Teacher teacher, ArrayList<Student> students, String name) {
+    public static final ArrayList<ClassRoom> listClass = new ArrayList<>();
+    
+    public ClassRoom(String name, String classroom, Teacher teacher, ArrayList<Student> students) {
         super(name);
         this.classroom = classroom;
         this.teacher = teacher;

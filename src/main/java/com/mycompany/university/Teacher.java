@@ -12,36 +12,28 @@ import java.util.ArrayList;
  */
 public class Teacher extends University {
 
-    private int yearsExperience;
-    private int jobTime;
-    
-    private static final  ArrayList<Teacher> listTeacher = new ArrayList<>();
+    private double baseSalary;
+    public static final ArrayList<Teacher> listTeacher = new ArrayList<>();
 
-
-    public Teacher(int yearsExperience, int jobTime, String name) {
+    public Teacher(double baseSalary, String name) {
         super(name);
-        this.yearsExperience = yearsExperience;
-        this.jobTime = jobTime;
+        this.baseSalary = baseSalary;
     }
 
-    public int getYearsExperience() {
-        return yearsExperience;
-    }
-
-    public void setYearsExperience(int yearsExperience) {
-        this.yearsExperience = yearsExperience;
-    }
-
-    public int getJobTime() {
-        return jobTime;
-    }
-
-    public void setJobTime(int jobTime) {
-        this.jobTime = jobTime;
+    public double calculateSalary() {
+        return baseSalary;
     }
 
     public static ArrayList<Teacher> getListTeacher() {
         return listTeacher;
     }
-    
+
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+
+    public void setBaseSalary(double baseSalary) {
+        this.baseSalary = baseSalary;
+    }
+
 }

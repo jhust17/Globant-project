@@ -14,8 +14,8 @@ public class Student extends University {
 
     private int id;
     private int age;
-    private static final ArrayList<Student> listStudent = new ArrayList<>();
-    public Student(int id, int age, String name) {
+    public static final ArrayList<Student> listStudent = new ArrayList<>();
+    public Student(String name, int id, int age) {
         super(name);
         this.id = id;
         this.age = age;
