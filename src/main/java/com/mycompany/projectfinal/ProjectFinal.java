@@ -10,6 +10,8 @@ import com.mycompany.university.Student;
 import com.mycompany.university.ClassRoom;
 import com.mycompany.university.FullTimeTeacher;
 import com.mycompany.university.PartTimeTeacher;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -31,9 +33,9 @@ public class ProjectFinal {
         Student.listStudent.add(new Student("Frank", 6, 23));
 
         ClassRoom.listClass.add(new ClassRoom("Math", "Room A", Teacher.listTeacher.get(0), Student.listStudent));
-        ClassRoom.listClass.add(new ClassRoom("History 101", "Room B", Teacher.listTeacher.get(1), Student.listStudent));
-        ClassRoom.listClass.add(new ClassRoom("Physics 101", "Room C", Teacher.listTeacher.get(2), Student.listStudent));
-        ClassRoom.listClass.add(new ClassRoom("Chemistry 101", "Room D", Teacher.listTeacher.get(3), Student.listStudent));
+        ClassRoom.listClass.add(new ClassRoom("History", "Room B", Teacher.listTeacher.get(1), Student.listStudent));
+        ClassRoom.listClass.add(new ClassRoom("Physics", "Room C", Teacher.listTeacher.get(2), Student.listStudent));
+        ClassRoom.listClass.add(new ClassRoom("Chemistry", "Room D", Teacher.listTeacher.get(3), Student.listStudent));
 
         System.out.println("Universidad Globant");
         Menu();
@@ -56,14 +58,66 @@ public class ProjectFinal {
 
             switch (option) {
                 case 1:
+                    for (Teacher teacher : Teacher.listTeacher) {
+                        System.out.println(teacher.getName() + "-Salario: $" + teacher.calculateSalary() + "\n");
+                    }
                     break;
                 case 2:
+                    for (int i = 0; i < ClassRoom.listClass.size(); i++) {
+                        System.out.println(i + ". " + ClassRoom.listClass.get(i).getName());
+                    }
+                    int op = scanner.nextInt();
+                    if (op >= 0 && op < ClassRoom.listClass.size()) {
+                        ClassRoom selectedClass = ClassRoom.listClass.get(op);
+                        System.out.println("Nombre Clase: " + selectedClass.getName());
+                        System.out.println("Aula: " + selectedClass.getClassroom());
+                        System.out.println("Profesor: " + selectedClass.getTeacher().getName());
+                        System.out.println("Estudiantes:");
+                        for (Student student : selectedClass.getStudents()) {
+                            System.out.println(student.getName());
+                        }
+                        System.out.println();
+                    } else {
+                        System.out.println("Opción invalida");
+                    }
                     break;
                 case 3:
+                    System.out.println("Nombre: ");
+                    Scanner nombre = new Scanner(System.in);
+                    String name = nombre.nextLine();
+                    System.out.println("Edad: ");
+                    Scanner edad = new Scanner(System.in);
+                    int age = edad.nextInt();
+                    ClassRoom selectedClass = ClassRoom.listClass.get(0);
+                    selectedClass.addStudent(new Student(name, selectedClass.getStudents().size() + 1, age));
+                    System.out.println("Fue agregado a la clase de: " + selectedClass.getName() + "\n");
                     break;
                 case 4:
+                    System.out.println("Nombre: ");
+                    Scanner nombreClase = new Scanner(System.in);
+                    String nameClass = nombreClase.nextLine();
+                    System.out.println("Aula: ");
+                    Scanner room = new Scanner(System.in);
+                    String roomName = room.nextLine();
+                    ClassRoom.listClass.add(new ClassRoom(nameClass, roomName, Teacher.listTeacher.get(1), Student.listStudent));
                     break;
                 case 5:
+                    for (Student student : Student.listStudent) {
+                        System.out.println(student.getId() + ". " + student.getName());
+                    }
+                    Scanner opId = new Scanner(System.in);
+                    int id = opId.nextInt();
+                    ArrayList<ClassRoom> studentClasses = ClassRoom.getClassesForStudent(id);
+
+                    if (studentClasses.isEmpty()) {
+                        System.out.println("Student not found in any classes.");
+                    } else {
+                        System.out.println("Classes: ");
+                        for (ClassRoom studentClass : studentClasses) {
+                            System.out.println(studentClass.getName());
+                        }
+                        System.out.println();
+                    }
                     break;
                 case 6:
                     System.out.println("Vuelve pronto");
